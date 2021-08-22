@@ -1,0 +1,747 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<name>multimodule</name>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>io</groupId>
+	<artifactId>multimodule</artifactId>
+	<version>${global.version}</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>multimodule-data-domain</module>
+		<module>multimodule-data</module>
+		<module>multimodule-ejb</module>
+		<module>multimodule-rest</module>
+		<module>multimodule-ear</module>
+	</modules>
+
+	<repositories>
+		<repository>
+			<id>maven2-repository.dev.java.net</id>
+			<name>Java.net repository</name>
+			<url>http://download.java.net/maven/2</url>
+		</repository>
+		<repository>
+			<id>osgeo</id>
+			<name>Open Source Geospatial Foundation Repository</name>
+			<url>http://download.osgeo.org/webdav/geotools/</url>
+		</repository>
+		<repository>
+			<snapshots />
+			<id>snapshots</id>
+			<name>libs-snapshot</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</repository>
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+
+	<properties>
+	
+		<!-- Unique entry point for version number management -->
+		<!-- Debug/Release -->
+		<global.version>0.0.1-Debug</global.version>
+
+		<!-- java and maven-compiler-plugin -->
+		<maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.dependency.plugin.version>2.10</maven.dependency.plugin.version>
+		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+
+
+		<!-- ear ejb war plugin versions -->
+		<version.ear.plugin>3.0.1</version.ear.plugin>
+		<version.ejb.plugin>3.0.1</version.ejb.plugin>
+		<version.war.plugin>3.2.2</version.war.plugin>
+		<version.assembly.plugin>3.1.0</version.assembly.plugin>
+
+
+		<!-- DATABASE -->
+		<mariadb.version>2.1.2</mariadb.version>
+		<mybatis.version>3.5.2</mybatis.version>
+		<mybatis-cdi.version>1.1.0</mybatis-cdi.version>
+		<org.jadira.usertype.usertype.core.version>4.0.0.GA</org.jadira.usertype.usertype.core.version>
+
+
+		<!-- JSON/XML/CSV/PDF/QRCODE -->
+		<jackson.version>2.7.4</jackson.version>
+		<gson.version>2.8.6</gson.version>
+
+		<!-- COMMONS -->
+		<apache.commons.lang3.version>3.11</apache.commons.lang3.version>
+		<apache.commons.collections4.version>4.4</apache.commons.collections4.version>
+		<apache.commons.commons-text.version>1.9</apache.commons.commons-text.version>
+		<apache.commons.commons-io.version>2.11.0</apache.commons.commons-io.version>
+		<apache.commons.commons-codec.version>1.15</apache.commons.commons-codec.version>
+		<apache.commons.commons-commons-validator>1.7</apache.commons.commons-commons-validator>
+		<guava.version>30.1.1-jre</guava.version>
+
+
+		<!-- WEB -->
+		<java.ee.api.version>8.0</java.ee.api.version>
+		<java.ee.web.api.version>8.0</java.ee.web.api.version>
+		<servlet.version>4.0.0</servlet.version>
+		<mojarra.version>2.2.15</mojarra.version>
+
+
+		<!-- MIST -->
+		<firebase.version>6.3.0</firebase.version>
+		<stripe.version>11.5.1</stripe.version>
+		<joda-money.version>1.0.1</joda-money.version>
+		<joda-time.version>2.10.10</joda-time.version>
+		<urlrewritefilter.version>4.0.3</urlrewritefilter.version>
+
+
+		<!-- LOG -->
+		<log4j.version>2.14.1</log4j.version>
+		<slf4j.version>1.7.32</slf4j.version>
+
+
+		<!-- TEST -->
+		<junit.version>4.13.1</junit.version>
+		<weld-se.version>2.4.3.Final</weld-se.version>
+		<cdi-api.version>2.0-PFD2</cdi-api.version>
+		<jboss-transaction-api.version>1.0.1.Final</jboss-transaction-api.version>
+		<jandex.version>2.0.3.Final</jandex.version>
+		<jta.version>1.1</jta.version>
+		<btm.version>2.1.4</btm.version>
+		<mockito.version>2.7.22</mockito.version>
+
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+
+			<dependency>
+				<groupId>io.multimodule</groupId>
+				<artifactId>rithmic</artifactId>
+				<version>${project.version}</version>
+				<type>jar</type>
+			</dependency>
+
+			<dependency>
+				<groupId>io.multimodule</groupId>
+				<artifactId>multimodule-data</artifactId>
+				<version>${project.version}</version>
+				<type>jar</type>
+			</dependency>
+
+			<dependency>
+				<groupId>io.multimodule</groupId>
+				<artifactId>multimodule-data-domain</artifactId>
+				<version>${project.version}</version>
+				<type>jar</type>
+			</dependency>
+
+
+			<dependency>
+				<groupId>io.multimodule</groupId>
+				<artifactId>multimodule-ejb</artifactId>
+				<version>${project.version}</version>
+				<type>ejb</type>
+			</dependency>
+
+			<dependency>
+				<groupId>io.multimodule</groupId>
+				<artifactId>multimodule-rest</artifactId>
+				<version>${project.version}</version>
+				<type>war</type>
+			</dependency>
+
+			<!-- DATABASE -->
+			<!-- DATABASE -->
+			<!-- DATABASE -->
+
+			<!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
+			<dependency>
+				<groupId>org.mariadb.jdbc</groupId>
+				<artifactId>mariadb-java-client</artifactId>
+				<version>${mariadb.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis</artifactId>
+				<version>${mybatis.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-cdi -->
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis-cdi</artifactId>
+				<version>${mybatis-cdi.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-typehandlers-jsr310 -->
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis-typehandlers-jsr310</artifactId>
+				<version>1.0.2</version>
+			</dependency>
+
+			<!-- jadira serve per persistere gli oggetti di tipo Money -->
+			<dependency>
+				<groupId>org.jadira.usertype</groupId>
+				<artifactId>usertype.core</artifactId>
+				<version>${org.jadira.usertype.usertype.core.version}</version>
+			</dependency>
+
+			<!-- DATABASE -->
+			<!-- DATABASE -->
+			<!-- DATABASE -->
+
+
+			<!-- JSON/XML/CSV/PDF/QRCODE -->
+			<!-- JSON/XML/CSV/PDF/QRCODE -->
+			<!-- JSON/XML/CSV/PDF/QRCODE -->
+
+			<!-- http://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<!-- http://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<!-- http://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-annotations</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<!-- http://mvnrepository.com/artifact/com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.jaxrs</groupId>
+				<artifactId>jackson-jaxrs-json-provider</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+			<dependency>
+				<groupId>com.google.code.gson</groupId>
+				<artifactId>gson</artifactId>
+				<version>${gson.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/com.googlecode.jcsv/jcsv -->
+			<dependency>
+				<groupId>com.googlecode.jcsv</groupId>
+				<artifactId>jcsv</artifactId>
+				<version>${jcsv.version}</version>
+			</dependency>
+
+			<!-- http://mvnrepository.com/artifact/org.freemarker/freemarker -->
+			<dependency>
+				<groupId>org.freemarker</groupId>
+				<artifactId>freemarker</artifactId>
+				<version>${freemarker.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/com.lowagie/itext -->
+			<dependency>
+				<groupId>com.lowagie</groupId>
+				<artifactId>itext</artifactId>
+				<version>${itext.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi</artifactId>
+				<version>${apache.poi.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.xhtmlrenderer/flying-saucer-pdf -->
+			<dependency>
+				<groupId>org.xhtmlrenderer</groupId>
+				<artifactId>flying-saucer-pdf</artifactId>
+				<version>${flying-saucer.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/com.google.zxing/core -->
+			<dependency>
+				<groupId>com.google.zxing</groupId>
+				<artifactId>core</artifactId>
+				<version>${zxing.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/com.google.zxing/javase -->
+			<dependency>
+				<groupId>com.google.zxing</groupId>
+				<artifactId>javase</artifactId>
+				<version>${zxing.version}</version>
+			</dependency>
+
+			<!-- JSON/XML/CSV/PDF/QRCODE -->
+			<!-- JSON/XML/CSV/PDF/QRCODE -->
+			<!-- JSON/XML/CSV/PDF/QRCODE -->
+
+
+			<!-- COMMONS -->
+			<!-- COMMONS -->
+			<!-- COMMONS -->
+
+			<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${apache.commons.lang3.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-collections4</artifactId>
+				<version>${apache.commons.collections4.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-text -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-text</artifactId>
+				<version>${apache.commons.commons-text.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${apache.commons.commons-io.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+			<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>${apache.commons.commons-codec.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/commons-validator/commons-validator -->
+			<dependency>
+				<groupId>commons-validator</groupId>
+				<artifactId>commons-validator</artifactId>
+				<version>${apache.commons.commons-commons-validator}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>
+			</dependency>
+
+			<!-- COMMONS -->
+			<!-- COMMONS -->
+			<!-- COMMONS -->
+
+
+			<!-- WEB -->
+			<!-- WEB -->
+			<!-- WEB -->
+
+			<dependency>
+				<groupId>javax</groupId>
+				<artifactId>javaee-api</artifactId>
+				<version>${java.ee.api.version}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>javax</groupId>
+				<artifactId>javaee-web-api</artifactId>
+				<version>${java.ee.web.api.version}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>${servlet.version}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<!-- Mojarra JSF -->
+			<dependency>
+				<groupId>com.sun.faces</groupId>
+				<artifactId>jsf-api</artifactId>
+				<version>${mojarra.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.sun.faces</groupId>
+				<artifactId>jsf-impl</artifactId>
+				<version>${mojarra.version}</version>
+			</dependency>
+
+			<!-- PrimeFaces -->
+			<dependency>
+				<groupId>org.primefaces</groupId>
+				<artifactId>primefaces</artifactId>
+				<version>${primefaces.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.primefaces.extensions</groupId>
+				<artifactId>primefaces-extensions</artifactId>
+				<version>${primefaces.extensions.version}</version>
+			</dependency>
+
+			<!-- PrimeFaces Themes - All-Themes al posto di boostrap per provarli 
+				tutti (nel web.xml va aggiunta una variabile per attivarlo) -->
+			<dependency>
+				<groupId>org.primefaces.themes</groupId>
+				<artifactId>bootstrap</artifactId>
+				<version>1.0.10</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.omnifaces/omnifaces -->
+			<dependency>
+				<groupId>org.omnifaces</groupId>
+				<artifactId>omnifaces</artifactId>
+				<version>${omnifaces.version}</version>
+			</dependency>
+
+			<!-- This includes the admin-theme -->
+			<dependency>
+				<groupId>com.github.adminfaces</groupId>
+				<artifactId>admin-template</artifactId>
+				<version>${admin.template.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>rome</groupId>
+				<artifactId>rome</artifactId>
+				<version>1.0</version>
+			</dependency>
+
+			<!-- WEB -->
+			<!-- WEB -->
+			<!-- WEB -->
+
+
+			<!-- MIST -->
+			<!-- MIST -->
+			<!-- MIST -->
+
+			<!-- https://mvnrepository.com/artifact/org.joda/joda-money -->
+			<dependency>
+				<groupId>org.joda</groupId>
+				<artifactId>joda-money</artifactId>
+				<version>${joda-money.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
+			<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time</artifactId>
+				<version>${joda-time.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.tuckey/urlrewritefilter -->
+			<dependency>
+				<groupId>org.tuckey</groupId>
+				<artifactId>urlrewritefilter</artifactId>
+				<version>${urlrewritefilter.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-crypto 
+				GDPR compliant -->
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-crypto</artifactId>
+				<version>5.0.7.RELEASE</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				<version>4.5.6</version>
+			</dependency>
+
+			<!-- MIST -->
+			<!-- MIST -->
+			<!-- MIST -->
+
+
+			<!-- LOGS -->
+			<!-- LOGS -->
+			<!-- LOGS -->
+
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-api</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-core</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-simple</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-nop</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+
+			<!-- LOGS -->
+			<!-- LOGS -->
+			<!-- LOGS -->
+
+
+			<!-- TESTS -->
+			<!-- TESTS -->
+			<!-- TESTS -->
+
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.inject</groupId>
+				<artifactId>javax.inject</artifactId>
+				<version>1</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.jboss.weld.se</groupId>
+				<artifactId>weld-se</artifactId>
+				<version>${weld-se.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.enterprise</groupId>
+				<artifactId>cdi-api</artifactId>
+				<version>${cdi-api.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.jboss.spec.javax.transaction</groupId>
+				<artifactId>jboss-transaction-api_1.2_spec</artifactId>
+				<version>${jboss-transaction-api.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.jboss</groupId>
+				<artifactId>jandex</artifactId>
+				<version>${jandex.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.transaction</groupId>
+				<artifactId>jta</artifactId>
+				<version>${jta.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.codehaus.btm</groupId>
+				<artifactId>btm</artifactId>
+				<version>${btm.version}</version>
+				<scope>test</scope>
+				<exclusions>
+					<exclusion>
+						<artifactId>jta</artifactId>
+						<groupId>javax.transaction</groupId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>${mockito.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<!-- TESTS -->
+			<!-- TESTS -->
+			<!-- TESTS -->
+
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<!-- https://blog.oio.de/2011/12/09/accessing-maven-properties-from-your-code/ -->
+		<!-- Parses all files in the specified directory and replaces properties 
+			expressions if found -->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven.compiler.plugin.version}</version>
+					<configuration>
+						<source>${maven.compiler.source}</source>
+						<target>${maven.compiler.target}</target>
+						<!-- IMPORTANT -->
+						<useIncrementalCompilation>false</useIncrementalCompilation>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<version>1.4.0</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>${maven.dependency.plugin.version}</version>
+					<executions>
+						<execution>
+							<id>install</id>
+							<phase>install</phase>
+							<goals>
+								<goal>sources</goal>
+							</goals>
+						</execution>
+						<execution>
+							<phase>validate</phase>
+							<goals>
+								<goal>copy</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${endorsed.dir}</outputDirectory>
+								<silent>true</silent>
+								<artifactItems>
+									<artifactItem>
+										<groupId>javax</groupId>
+										<artifactId>javaee-endorsed-api</artifactId>
+										<version>7.0</version>
+										<type>jar</type>
+									</artifactItem>
+								</artifactItems>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<!-- I contenitori ear dovranno avere dentro questo -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-ear-plugin</artifactId>
+					<version>${version.ear.plugin}</version>
+					<configuration>
+						<!-- Tell Maven we are using Java EE 7 -->
+						<version>7</version>
+						<!-- Use Java EE ear libraries as needed. Java EE ear libraries are 
+							in easy way to package any libraries needed in the ear, and automatically 
+							have any modules (EJB-JARs and WARs) use them -->
+						<defaultLibBundleDir>lib</defaultLibBundleDir>
+					</configuration>
+				</plugin>
+
+				<!-- I progetti war dovranno avere dentro questo plugin -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>${version.war.plugin}</version>
+					<configuration>
+						<!-- Java EE 7 doesn't require web.xml, Maven needs to catch up! -->
+						<failOnMissingWebXml>false</failOnMissingWebXml>
+
+						<!-- Used to read sources inside the web page for Admin-LTE -->
+						<webResources>
+							<resource>
+								<directory>${build.sourceDirectory}</directory>
+								<targetPath>sources</targetPath>
+							</resource>
+							<resource>
+								<filtering>true</filtering>
+								<directory>src/test/resources</directory>
+								<includes>
+									<include>**/web.xml</include>
+								</includes>
+							</resource>
+						</webResources>
+					</configuration>
+
+				</plugin>
+
+				<!-- I progetti ejb dovranno avere dentro questo -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-ejb-plugin</artifactId>
+					<version>${version.ejb.plugin}</version>
+					<configuration>
+						<!-- Tell Maven we are using EJB 3.1 -->
+						<ejbVersion>3.1</ejbVersion>
+						<generateClient>true</generateClient>
+						<clientIncludes>
+							<clientInclude>/com/**</clientInclude>
+						</clientIncludes>
+					</configuration>
+				</plugin>
+
+				<!-- https://www.mkyong.com/maven/create-a-fat-jar-file-maven-assembly-plugin/ -->
+				<!-- Maven Assembly Plugin to create fat jars -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>${version.assembly.plugin}</version>
+					<configuration>
+						<!-- get all project dependencies -->
+						<descriptorRefs>
+							<descriptorRef>jar-with-dependencies</descriptorRef>
+						</descriptorRefs>
+						<!-- MainClass in mainfest make a executable jar -->
+						<!-- <archive> <manifest> <mainClass>com.mkyong.core.utils.App</mainClass> 
+							</manifest> </archive> -->
+					</configuration>
+					<executions>
+						<execution>
+							<id>make-assembly</id>
+							<!-- bind to the packaging phase -->
+							<phase>package</phase>
+							<goals>
+								<goal>single</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
+	</build>
+
+</project>

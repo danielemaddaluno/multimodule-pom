@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io</groupId>
+		<artifactId>multimodule</artifactId>
+		<version>${global.version}</version>
+	</parent>
+
+	<groupId>io.multimodule</groupId>
+	<artifactId>multimodule-data</artifactId>
+	<name>multimodule-data</name>
+
+	<!-- To insert spring: http://hmkcode.com/mybatis-spring-junit-the-missing-part/ -->
+	<dependencies>
+		<dependency>
+			<groupId>io.multimodule</groupId>
+			<artifactId>multimodule-data-domain</artifactId>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-cdi</artifactId>
+		</dependency>
+		<!-- CDI -->
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-typehandlers-jsr310</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mariadb.jdbc</groupId>
+			<artifactId>mariadb-java-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.joda</groupId>
+			<artifactId>joda-money</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency>
+		<!-- jadira serve per persistere gli oggetti di tipo Money -->
+		<dependency>
+			<groupId>org.jadira.usertype</groupId>
+			<artifactId>usertype.core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+
+		<!-- Questi due sotto aggiunti per StaticLoggerBinder errore rosso che 
+			dava Failed to load class "org.slf4j.impl.StaticLoggerBinder" -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+
+		<!-- Controllare che sia usato -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>

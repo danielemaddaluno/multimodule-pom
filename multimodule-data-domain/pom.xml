@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io</groupId>
+		<artifactId>multimodule</artifactId>
+		<version>${global.version}</version>
+	</parent>
+
+	<groupId>io.multimodule</groupId>
+	<artifactId>multimodule-data-domain</artifactId>
+	<name>multimodule-data-domain</name>
+
+	<properties>
+		<!-- java and maven-compiler-plugin -->
+		<!-- these two are different from the parent one because this project is 
+			shared with the android client which needs a max compiler version 1.7 -->
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+	</properties>
+
+	<dependencies>
+
+		<!-- https://mvnrepository.com/artifact/org.joda/joda-money -->
+		<dependency>
+			<groupId>org.joda</groupId>
+			<artifactId>joda-money</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-text -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-text</artifactId>
+		</dependency>
+
+		<!-- http://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+
+		<!-- http://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+					<!-- IMPORTANT -->
+					<useIncrementalCompilation>false</useIncrementalCompilation>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>

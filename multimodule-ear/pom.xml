@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io</groupId>
+		<artifactId>multimodule</artifactId>
+		<version>${global.version}</version>
+	</parent>
+
+	<groupId>io.multimodule</groupId>
+	<artifactId>multimodule-ear</artifactId>
+	<packaging>ear</packaging>
+
+	<name>multimodule-ear</name>
+
+	<properties>
+	</properties>
+
+	<dependencies>
+		
+		<dependency>
+			<groupId>io.multimodule</groupId>
+			<artifactId>multimodule-ejb</artifactId>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>io.multimodule</groupId>
+			<artifactId>multimodule-rest</artifactId>
+			<type>war</type>
+		</dependency>
+	</dependencies>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+
+				<configuration>
+					<!-- Affinché funzioni va usato come bundle name "XXX-${parent.version}-SNAPSHOT.jar" che è lo stesso che genera eclipse esportando manualmente -->
+					<!-- https://maven.apache.org/plugins/maven-ear-plugin/examples/customizing-module-uri.html -->
+					<!-- https://maven.apache.org/plugins/maven-ear-plugin/examples/customizing-a-module-filename.html -->
+					<!-- https://maven.apache.org/plugins/maven-ear-plugin/examples/customizing-context-root.html -->
+					<!-- Tell Maven we are using Java EE 7 -->
+					<version>7</version>
+					<!-- Use Java EE ear libraries as needed. Java EE ear libraries are
+						in easy way to package any libraries needed in the ear, and automatically
+						have any modules (EJB-JARs and WARs) use them -->
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<modules>
+						<jarModule>
+							<groupId>io.multimodule</groupId>
+							<artifactId>multimodule-data-domain</artifactId>
+							<bundleFileName>multimodule-data-domain-${parent.version}-SNAPSHOT.jar</bundleFileName>
+							<bundleDir>lib</bundleDir>
+						</jarModule>
+						<jarModule>
+							<groupId>io.multimodule</groupId>
+							<artifactId>multimodule-data</artifactId>
+							<bundleFileName>multimodule-data-${parent.version}-SNAPSHOT.jar</bundleFileName>
+							<bundleDir>lib</bundleDir>
+						</jarModule>
+						<ejbModule>
+							<groupId>io.multimodule</groupId>
+							<artifactId>multimodule-ejb</artifactId>
+							<bundleFileName>multimodule-ejb-${parent.version}-SNAPSHOT.jar</bundleFileName>
+						</ejbModule>
+						<webModule>
+							<groupId>io.multimodule</groupId>
+							<artifactId>multimodule-rest</artifactId>
+							<bundleFileName>multimodule-rest-${parent.version}-SNAPSHOT.war</bundleFileName>
+							<contextRoot>/multimodule-rest</contextRoot>
+						</webModule>
+					</modules>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
